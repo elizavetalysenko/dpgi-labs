@@ -1,0 +1,39 @@
+<changelist name="Uncommitted_changes_before_Checkout_at_5_21_2024_2_03_PM_[Changes]1" date="1716289593435" recycled="true" deleted="true">
+  <option name="PATH" value="$PROJECT_DIR$/.idea/.idea.dpgi-labs.dir/.idea/shelf/Uncommitted_changes_before_Checkout_at_5_21_2024_2_03_PM_[Changes]1/shelved.patch" />
+  <option name="DESCRIPTION" value="Uncommitted changes before Checkout at 5/21/2024 2:03 PM [Changes]" />
+  <binary>
+    <option name="BEFORE_PATH" value="lab2/obj/Debug/net7.0-windows/apphost.exe" />
+    <option name="AFTER_PATH" value="lab2/obj/Debug/net7.0-windows/apphost.exe" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/.idea.dpgi-labs.dir/.idea/shelf/Uncommitted_changes_before_Checkout_at_5_21_2024_2_03_PM_[Changes]1/apphost.exe" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="lab2/obj/Debug/net7.0-windows/lab2.dll" />
+    <option name="AFTER_PATH" value="lab2/obj/Debug/net7.0-windows/lab2.dll" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/.idea.dpgi-labs.dir/.idea/shelf/Uncommitted_changes_before_Checkout_at_5_21_2024_2_03_PM_[Changes]1/lab2.dll" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="lab2/obj/Debug/net7.0-windows/lab2.pdb" />
+    <option name="AFTER_PATH" value="lab2/obj/Debug/net7.0-windows/lab2.pdb" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/.idea.dpgi-labs.dir/.idea/shelf/Uncommitted_changes_before_Checkout_at_5_21_2024_2_03_PM_[Changes]1/lab2.pdb" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="lab2/obj/Debug/net7.0-windows/MainWindow.baml" />
+    <option name="AFTER_PATH" value="lab2/obj/Debug/net7.0-windows/MainWindow.baml" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/.idea.dpgi-labs.dir/.idea/shelf/Uncommitted_changes_before_Checkout_at_5_21_2024_2_03_PM_[Changes]1/MainWindow.baml" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="lab2/bin/Debug/net7.0-windows/lab2.exe" />
+    <option name="AFTER_PATH" value="lab2/bin/Debug/net7.0-windows/lab2.exe" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/.idea.dpgi-labs.dir/.idea/shelf/Uncommitted_changes_before_Checkout_at_5_21_2024_2_03_PM_[Changes]1/lab2.exe" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="lab2/obj/Debug/net7.0-windows/lab2.g.resources" />
+    <option name="AFTER_PATH" value="lab2/obj/Debug/net7.0-windows/lab2.g.resources" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/.idea.dpgi-labs.dir/.idea/shelf/Uncommitted_changes_before_Checkout_at_5_21_2024_2_03_PM_[Changes]1/lab2.g.resources" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="lab2/obj/Debug/net7.0-windows/lab2.AssemblyInfoInputs.cache" />
+    <option name="AFTER_PATH" value="lab2/obj/Debug/net7.0-windows/lab2.AssemblyInfoInputs.cache" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/.idea.dpgi-labs.dir/.idea/shelf/Uncommitted_changes_before_Checkout_at_5_21_2024_2_03_PM_[Changes]1/lab2.AssemblyInfoInputs.cache" />
+  </binary>
+</changelist>

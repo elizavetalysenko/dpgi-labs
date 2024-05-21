@@ -1,0 +1,180 @@
+Index: lab2/MainWindow.xaml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><Window x:Class=\"lab2.MainWindow\"\r\n        xmlns=\"http://schemas.microsoft.com/winfx/2006/xaml/presentation\"\r\n        xmlns:x=\"http://schemas.microsoft.com/winfx/2006/xaml\"\r\n        xmlns:d=\"http://schemas.microsoft.com/expression/blend/2008\"\r\n        xmlns:mc=\"http://schemas.openxmlformats.org/markup-compatibility/2006\"\r\n        mc:Ignorable=\"d\"\r\n        Title=\"TextEditor\" Height=\"450\" Width=\"800\">\r\n    \r\n    <Window.Resources>\r\n        <LinearGradientBrush x:Key=\"LinearPanelBrush\">\r\n            <GradientStop Color=\"Yellow\" Offset=\"0\"></GradientStop>\r\n            <GradientStop Color=\"Blue\" Offset=\"0.5\"></GradientStop>\r\n            <GradientStop Color=\"Yellow\" Offset=\"0.8\"></GradientStop>\r\n        </LinearGradientBrush>\r\n\r\n        <Style TargetType=\"Button\">\r\n            <Setter Property=\"Margin\" Value=\"5\"></Setter>\r\n            <Setter Property=\"Background\" Value=\"Transparent\"></Setter>\r\n            <Setter Property=\"BorderBrush\" Value=\"White\"></Setter>\r\n        </Style>\r\n    </Window.Resources>\r\n    <Grid>\r\n        <Grid.RowDefinitions>\r\n            <RowDefinition Height=\"Auto\" />\r\n            <RowDefinition />\r\n        </Grid.RowDefinitions>\r\n        <Border BorderBrush=\"#FFCBBEBE\" BorderThickness=\"2\" CornerRadius=\"10\"\r\n                Background=\"{StaticResource LinearPanelBrush}\">\r\n            <StackPanel Orientation=\"Horizontal\">\r\n                <Button Command=\"Open\">\r\n                    <Image Source=\"Images/open.png\" Width=\"100\" ToolTip=\"Відкрити\" />\r\n                </Button>\r\n                <Button Command=\"New\">\r\n                    <Image Source=\"Images/erase.png\" Width=\"100\" ToolTip=\"Стерти\" />\r\n                </Button>\r\n                <Button Command=\"Copy\" CommandTarget=\"{Binding ElementName=InputTextBox}\">\r\n                    <Image Source=\"Images/copy.png\" Width=\"100\" ToolTip=\"Копіювати\" />\r\n                </Button>\r\n                <Button Command=\"Paste\" CommandTarget=\"{Binding ElementName=InputTextBox}\">\r\n                    <Image Source=\"Images/paste.png\" Width=\"100\" ToolTip=\"Вставити\" />\r\n                </Button>\r\n            </StackPanel>\r\n        </Border>\r\n        <Border Grid.Row=\"1\" BorderBrush=\"#FFCBBEBE\" BorderThickness=\"2\" CornerRadius=\"10\"\r\n                Background=\"{StaticResource LinearPanelBrush}\">\r\n            <Grid>\r\n                <Grid.RowDefinitions>\r\n                    <RowDefinition />\r\n                    <RowDefinition Height=\"Auto\" />\r\n                </Grid.RowDefinitions>\r\n                <TextBox Name=\"InputTextBox\" VerticalScrollBarVisibility=\"Visible\"\r\n                         TextWrapping=\"Wrap\" Margin=\"15\"\r\n                         FontSize=\"{Binding ElementName=FontSlider, Path=Value, UpdateSourceTrigger=PropertyChanged}\" />\r\n                <DockPanel Grid.Row=\"1\" Margin=\"15\">\r\n                    <Label>Розмір шрифту:</Label>\r\n                    <Slider Name=\"FontSlider\" Margin=\"4\" MinWidth=\"100\" Minimum=\"12\" Maximum=\"100\"></Slider>\r\n                    <Button DockPanel.Dock=\"Bottom\" Width=\"40\" Content=\"OK\" Style=\"{x:Null}\" ToolTip=\"Зберегти\"\r\n                            Command=\"Save\" />\r\n                </DockPanel>\r\n            </Grid>\r\n        </Border>\r\n    </Grid>\r\n</Window>
+===================================================================
+diff --git a/lab2/MainWindow.xaml b/lab2/MainWindow.xaml
+--- a/lab2/MainWindow.xaml	
++++ b/lab2/MainWindow.xaml	
+@@ -19,11 +19,13 @@
+             <Setter Property="BorderBrush" Value="White"></Setter>
+         </Style>
+     </Window.Resources>
++    
+     <Grid>
+         <Grid.RowDefinitions>
+             <RowDefinition Height="Auto" />
+             <RowDefinition />
+         </Grid.RowDefinitions>
++        
+         <Border BorderBrush="#FFCBBEBE" BorderThickness="2" CornerRadius="10"
+                 Background="{StaticResource LinearPanelBrush}">
+             <StackPanel Orientation="Horizontal">
+@@ -41,6 +43,7 @@
+                 </Button>
+             </StackPanel>
+         </Border>
++        
+         <Border Grid.Row="1" BorderBrush="#FFCBBEBE" BorderThickness="2" CornerRadius="10"
+                 Background="{StaticResource LinearPanelBrush}">
+             <Grid>
+@@ -51,13 +54,20 @@
+                 <TextBox Name="InputTextBox" VerticalScrollBarVisibility="Visible"
+                          TextWrapping="Wrap" Margin="15"
+                          FontSize="{Binding ElementName=FontSlider, Path=Value, UpdateSourceTrigger=PropertyChanged}" />
+-                <DockPanel Grid.Row="1" Margin="15">
+-                    <Label>Розмір шрифту:</Label>
+-                    <Slider Name="FontSlider" Margin="4" MinWidth="100" Minimum="12" Maximum="100"></Slider>
+-                    <Button DockPanel.Dock="Bottom" Width="40" Content="OK" Style="{x:Null}" ToolTip="Зберегти"
+-                            Command="Save" />
+-                </DockPanel>
++                
++                
++
++                
++                <StackPanel Grid.Row="1" Margin="15">
++                    <TextBlock Text="Width" Margin="10"/>
++                    <Slider Name="WidthSlider" Minimum="300" Maximum="800" Value="800"
++                            ValueChanged="WidthSlider_ValueChanged" Margin="10"/>
++        
++                    <TextBlock Text="Height" Margin="10"/>
++                    <Slider Name="HeightSlider" Minimum="300" Maximum="800" Value="450"
++                            ValueChanged="HeightSlider_ValueChanged" Margin="10"/>
++                </StackPanel>
+             </Grid>
+         </Border>
+     </Grid>
+-</Window>
+\ No newline at end of file
++</Window>
+Index: lab2/MainWindow.xaml.cs
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>using System.Windows;\r\nusing System.Windows.Input;\r\nusing Microsoft.Win32;\r\n\r\nnamespace lab2;\r\n\r\npublic partial class MainWindow : Window\r\n{\r\n    public MainWindow()\r\n    {\r\n        InitializeComponent();\r\n        var saveCommand = new CommandBinding(ApplicationCommands.Save, Executed_Save, CanExecute_Save);\r\n        var openCommand = new CommandBinding(ApplicationCommands.Open, Executed_Open, CanExecute_Open);\r\n        var eraseCommand = new CommandBinding(ApplicationCommands.New, Executed_Erase, CanExecute_Erase);\r\n        CommandBindings.Add(saveCommand);\r\n        CommandBindings.Add(openCommand);\r\n        CommandBindings.Add(eraseCommand);\r\n    }\r\n\r\n    private void CanExecute_Save(object sender, CanExecuteRoutedEventArgs e)\r\n    {\r\n        e.CanExecute = InputTextBox.Text.Trim().Length > 0;\r\n    }\r\n\r\n    private void Executed_Save(object sender, ExecutedRoutedEventArgs e)\r\n    {\r\n        var saveFileDialog = new SaveFileDialog\r\n        {\r\n            Filter = \"Text files (*.txt)|*.txt\"\r\n        };\r\n        if (saveFileDialog.ShowDialog() == true)\r\n        {\r\n            System.IO.File.WriteAllText(saveFileDialog.FileName, InputTextBox.Text);\r\n        }\r\n    }\r\n\r\n    private void CanExecute_Open(object sender, CanExecuteRoutedEventArgs e)\r\n    {\r\n        e.CanExecute = true;\r\n    }\r\n\r\n    private void Executed_Open(object sender, ExecutedRoutedEventArgs e)\r\n    {\r\n    var openFileDialog = new OpenFileDialog\r\n    {Filter = \"Text files (*.txt)|*.txt\"\r\n        \r\n                 };\r\n                 if (openFileDialog.ShowDialog() == true)\r\n                 {\r\n                     InputTextBox.Text = System.IO.File.ReadAllText(openFileDialog.FileName);\r\n                 }\r\n    }\r\n    private void CanExecute_Erase(object sender, CanExecuteRoutedEventArgs e)\r\n    {\r\n        e.CanExecute = InputTextBox.Text.Trim().Length > 0;\r\n    }\r\n\r\n    private void Executed_Erase(object sender, ExecutedRoutedEventArgs e)\r\n    {\r\n        InputTextBox.Text = \"\";\r\n    }\r\n}
+===================================================================
+diff --git a/lab2/MainWindow.xaml.cs b/lab2/MainWindow.xaml.cs
+--- a/lab2/MainWindow.xaml.cs	
++++ b/lab2/MainWindow.xaml.cs	
+@@ -59,4 +59,14 @@
+     {
+         InputTextBox.Text = "";
+     }
++    
++    private void WidthSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
++    {
++        this.Width = e.NewValue;
++    }
++
++    private void HeightSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
++    {
++        this.Height = e.NewValue;
++    }
+ }
+\ No newline at end of file
+Index: lab2/obj/Debug/net7.0-windows/MainWindow.g.cs
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>#pragma checksum \"..\\..\\..\\MainWindow.xaml\" \"{ff1816ec-aa5e-4d10-87f7-6f4963833460}\" \"0113049AE1A247669137D6DCD71E542E01258380\"\r\n//------------------------------------------------------------------------------\r\n// <auto-generated>\r\n//     This code was generated by a tool.\r\n//\r\n//     Changes to this file may cause incorrect behavior and will be lost if\r\n//     the code is regenerated.\r\n// </auto-generated>\r\n//------------------------------------------------------------------------------\r\n\r\nusing System;\r\nusing System.Diagnostics;\r\nusing System.Windows;\r\nusing System.Windows.Automation;\r\nusing System.Windows.Controls;\r\nusing System.Windows.Controls.Primitives;\r\nusing System.Windows.Controls.Ribbon;\r\nusing System.Windows.Data;\r\nusing System.Windows.Documents;\r\nusing System.Windows.Ink;\r\nusing System.Windows.Input;\r\nusing System.Windows.Markup;\r\nusing System.Windows.Media;\r\nusing System.Windows.Media.Animation;\r\nusing System.Windows.Media.Effects;\r\nusing System.Windows.Media.Imaging;\r\nusing System.Windows.Media.Media3D;\r\nusing System.Windows.Media.TextFormatting;\r\nusing System.Windows.Navigation;\r\nusing System.Windows.Shapes;\r\nusing System.Windows.Shell;\r\n\r\n\r\nnamespace lab2 {\r\n    \r\n    \r\n    /// <summary>\r\n    /// MainWindow\r\n    /// </summary>\r\n    public partial class MainWindow : System.Windows.Window, System.Windows.Markup.IComponentConnector {\r\n        \r\n        \r\n        #line 51 \"..\\..\\..\\MainWindow.xaml\"\r\n        [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute(\"Microsoft.Performance\", \"CA1823:AvoidUnusedPrivateFields\")]\r\n        internal System.Windows.Controls.TextBox InputTextBox;\r\n        \r\n        #line default\r\n        #line hidden\r\n        \r\n        \r\n        #line 56 \"..\\..\\..\\MainWindow.xaml\"\r\n        [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute(\"Microsoft.Performance\", \"CA1823:AvoidUnusedPrivateFields\")]\r\n        internal System.Windows.Controls.Slider FontSlider;\r\n        \r\n        #line default\r\n        #line hidden\r\n        \r\n        private bool _contentLoaded;\r\n        \r\n        /// <summary>\r\n        /// InitializeComponent\r\n        /// </summary>\r\n        [System.Diagnostics.DebuggerNonUserCodeAttribute()]\r\n        [System.CodeDom.Compiler.GeneratedCodeAttribute(\"PresentationBuildTasks\", \"8.0.3.0\")]\r\n        public void InitializeComponent() {\r\n            if (_contentLoaded) {\r\n                return;\r\n            }\r\n            _contentLoaded = true;\r\n            System.Uri resourceLocater = new System.Uri(\"/lab2;component/mainwindow.xaml\", System.UriKind.Relative);\r\n            \r\n            #line 1 \"..\\..\\..\\MainWindow.xaml\"\r\n            System.Windows.Application.LoadComponent(this, resourceLocater);\r\n            \r\n            #line default\r\n            #line hidden\r\n        }\r\n        \r\n        [System.Diagnostics.DebuggerNonUserCodeAttribute()]\r\n        [System.CodeDom.Compiler.GeneratedCodeAttribute(\"PresentationBuildTasks\", \"8.0.3.0\")]\r\n        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Never)]\r\n        [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute(\"Microsoft.Design\", \"CA1033:InterfaceMethodsShouldBeCallableByChildTypes\")]\r\n        [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute(\"Microsoft.Maintainability\", \"CA1502:AvoidExcessiveComplexity\")]\r\n        [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute(\"Microsoft.Performance\", \"CA1800:DoNotCastUnnecessarily\")]\r\n        void System.Windows.Markup.IComponentConnector.Connect(int connectionId, object target) {\r\n            switch (connectionId)\r\n            {\r\n            case 1:\r\n            this.InputTextBox = ((System.Windows.Controls.TextBox)(target));\r\n            return;\r\n            case 2:\r\n            this.FontSlider = ((System.Windows.Controls.Slider)(target));\r\n            return;\r\n            }\r\n            this._contentLoaded = true;\r\n        }\r\n    }\r\n}\r\n\r\n
+===================================================================
+diff --git a/lab2/obj/Debug/net7.0-windows/MainWindow.g.cs b/lab2/obj/Debug/net7.0-windows/MainWindow.g.cs
+--- a/lab2/obj/Debug/net7.0-windows/MainWindow.g.cs	
++++ b/lab2/obj/Debug/net7.0-windows/MainWindow.g.cs	
+@@ -1,4 +1,4 @@
+-#pragma checksum "..\..\..\MainWindow.xaml" "{ff1816ec-aa5e-4d10-87f7-6f4963833460}" "0113049AE1A247669137D6DCD71E542E01258380"
++#pragma checksum "..\..\..\MainWindow.xaml" "{ff1816ec-aa5e-4d10-87f7-6f4963833460}" "F52E1DAA074AFD40663B5DC1DF6C773E70360117"
+ //------------------------------------------------------------------------------
+ // <auto-generated>
+ //     This code was generated by a tool.
+@@ -40,7 +40,7 @@
+     public partial class MainWindow : System.Windows.Window, System.Windows.Markup.IComponentConnector {
+         
+         
+-        #line 51 "..\..\..\MainWindow.xaml"
++        #line 54 "..\..\..\MainWindow.xaml"
+         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
+         internal System.Windows.Controls.TextBox InputTextBox;
+         
+@@ -48,9 +48,17 @@
+         #line hidden
+         
+         
+-        #line 56 "..\..\..\MainWindow.xaml"
++        #line 63 "..\..\..\MainWindow.xaml"
++        [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
++        internal System.Windows.Controls.Slider WidthSlider;
++        
++        #line default
++        #line hidden
++        
++        
++        #line 67 "..\..\..\MainWindow.xaml"
+         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
+-        internal System.Windows.Controls.Slider FontSlider;
++        internal System.Windows.Controls.Slider HeightSlider;
+         
+         #line default
+         #line hidden
+@@ -89,7 +97,22 @@
+             this.InputTextBox = ((System.Windows.Controls.TextBox)(target));
+             return;
+             case 2:
+-            this.FontSlider = ((System.Windows.Controls.Slider)(target));
++            this.WidthSlider = ((System.Windows.Controls.Slider)(target));
++            
++            #line 64 "..\..\..\MainWindow.xaml"
++            this.WidthSlider.ValueChanged += new System.Windows.RoutedPropertyChangedEventHandler<double>(this.WidthSlider_ValueChanged);
++            
++            #line default
++            #line hidden
++            return;
++            case 3:
++            this.HeightSlider = ((System.Windows.Controls.Slider)(target));
++            
++            #line 68 "..\..\..\MainWindow.xaml"
++            this.HeightSlider.ValueChanged += new System.Windows.RoutedPropertyChangedEventHandler<double>(this.HeightSlider_ValueChanged);
++            
++            #line default
++            #line hidden
+             return;
+             }
+             this._contentLoaded = true;
+Index: lab2/obj/Debug/net7.0-windows/lab2.sourcelink.json
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>{\"documents\":{\"C:\\\\Users\\\\lialxx\\\\RiderProjects\\\\dpgi-labs\\\\*\":\"https://raw.githubusercontent.com/elizavetalysenko/dpgi-labs/011210c2ee62cf3f400882e479490907048c0b85/*\"}}
+===================================================================
+diff --git a/lab2/obj/Debug/net7.0-windows/lab2.sourcelink.json b/lab2/obj/Debug/net7.0-windows/lab2.sourcelink.json
+--- a/lab2/obj/Debug/net7.0-windows/lab2.sourcelink.json	
++++ b/lab2/obj/Debug/net7.0-windows/lab2.sourcelink.json	
+@@ -1,1 +1,1 @@
+-{"documents":{"C:\\Users\\lialxx\\RiderProjects\\dpgi-labs\\*":"https://raw.githubusercontent.com/elizavetalysenko/dpgi-labs/011210c2ee62cf3f400882e479490907048c0b85/*"}}
+\ No newline at end of file
++{"documents":{"C:\\Users\\lialxx\\RiderProjects\\dpgi-labs\\*":"https://raw.githubusercontent.com/elizavetalysenko/dpgi-labs/00c0fbd9a5a2f43bd9b81f86acff93c3b3b7453c/*"}}
+\ No newline at end of file
+Index: lab2/obj/Debug/net7.0-windows/lab2.AssemblyInfo.cs
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>//------------------------------------------------------------------------------\r\n// <auto-generated>\r\n//     This code was generated by a tool.\r\n//\r\n//     Changes to this file may cause incorrect behavior and will be lost if\r\n//     the code is regenerated.\r\n// </auto-generated>\r\n//------------------------------------------------------------------------------\r\n\r\nusing System;\r\nusing System.Reflection;\r\n\r\n[assembly: System.Reflection.AssemblyCompanyAttribute(\"lab2\")]\r\n[assembly: System.Reflection.AssemblyConfigurationAttribute(\"Debug\")]\r\n[assembly: System.Reflection.AssemblyFileVersionAttribute(\"1.0.0.0\")]\r\n[assembly: System.Reflection.AssemblyInformationalVersionAttribute(\"1.0.0+011210c2ee62cf3f400882e479490907048c0b85\")]\r\n[assembly: System.Reflection.AssemblyProductAttribute(\"lab2\")]\r\n[assembly: System.Reflection.AssemblyTitleAttribute(\"lab2\")]\r\n[assembly: System.Reflection.AssemblyVersionAttribute(\"1.0.0.0\")]\r\n[assembly: System.Runtime.Versioning.TargetPlatformAttribute(\"Windows7.0\")]\r\n[assembly: System.Runtime.Versioning.SupportedOSPlatformAttribute(\"Windows7.0\")]\r\n\r\n// Generated by the MSBuild WriteCodeFragment class.\r\n\r\n
+===================================================================
+diff --git a/lab2/obj/Debug/net7.0-windows/lab2.AssemblyInfo.cs b/lab2/obj/Debug/net7.0-windows/lab2.AssemblyInfo.cs
+--- a/lab2/obj/Debug/net7.0-windows/lab2.AssemblyInfo.cs	
++++ b/lab2/obj/Debug/net7.0-windows/lab2.AssemblyInfo.cs	
+@@ -13,7 +13,7 @@
+ [assembly: System.Reflection.AssemblyCompanyAttribute("lab2")]
+ [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
+ [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
+-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+011210c2ee62cf3f400882e479490907048c0b85")]
++[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+00c0fbd9a5a2f43bd9b81f86acff93c3b3b7453c")]
+ [assembly: System.Reflection.AssemblyProductAttribute("lab2")]
+ [assembly: System.Reflection.AssemblyTitleAttribute("lab2")]
+ [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
